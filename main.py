@@ -85,6 +85,7 @@ class MyWindow(QMainWindow):
             self.ui.progressBar.setValue(20)
             self.run_command('dir')
             self.process.waitForFinished()
+            self.set_buttons_enable(False)
             self.ui.progressBar.setValue(50)
             self.run_command('pio run -t upload')
         else:
