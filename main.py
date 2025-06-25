@@ -49,6 +49,9 @@ class MyWindow(QMainWindow):
     def process_finished(self):
         """Действия после завершения команды"""
         self.append_output("\nProcess finished. Exit code: " + str(self.process.exitCode()))
+        self.ui.progressBar.setValue(100)
+        self.clear_progress()
+        self.set_buttons_enable(True)
 
     def handle_error(self, error):
         """Обработка ошибок выполнения"""
@@ -84,12 +87,10 @@ class MyWindow(QMainWindow):
             self.process.waitForFinished()
             self.ui.progressBar.setValue(50)
             self.run_command('pio run -t upload')
-            self.process.waitForFinished()
-            self.ui.progressBar.setValue(100)
         else:
             self.write_output("Операция отменена. Путь к папке проекта не указан.")
-        self.clear_progress()
-        self.set_buttons_enable(True)
+            self.clear_progress()
+            self.set_buttons_enable(True)
 
     def uploadfs_button_clicked(self):
         self.set_buttons_enable(False)
@@ -99,12 +100,10 @@ class MyWindow(QMainWindow):
         if project_path:
             self.ui.progressBar.setValue(80)
             self.run_command('pio run -t uploadfs')
-            self.process.waitForFinished()
-            self.ui.progressBar.setValue(100)
         else:
             self.write_output("Операция отменена. Путь к папке проекта не указан.")
-        self.clear_progress()
-        self.set_buttons_enable(True)
+            self.clear_progress()
+            self.set_buttons_enable(True)
     
     def browse_folder(self):
         """Обработчик кнопки выбора папки"""
