@@ -21,50 +21,56 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
-        MainWindow.setMinimumSize(QtCore.QSize(380, 390))
-        MainWindow.setMaximumSize(QtCore.QSize(380, 390))
+        MainWindow.setMinimumSize(QtCore.QSize(380, 400))
+        MainWindow.setMaximumSize(QtCore.QSize(380, 400))
         MainWindow.setAcceptDrops(True)
         MainWindow.setStyleSheet("QWidget {\n"
-"    background-color: rgb(65, 65, 65);\n"
+"    background-color: rgb(30, 30, 30);\n"
 "    color: rgb(255, 255, 255);\n"
-"    font: 14pt \"Arial Rounded MT Bold\";\n"
+"    font: 12pt \"Arial Rounded MT Bold\";\n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
-"    background-color: rgb(80, 80, 80);\n"
+"    background-color: rgb(60, 60, 60);\n"
 "}\n"
 "\n"
 "QTextEdit{\n"
-"    border: 1px solid rgb(255, 255, 255);\n"
+"    border: 1px solid rgb(60, 75, 140);\n"
 "    color: rgb(255, 255, 255);\n"
 "    font-size: 12px;\n"
 "}\n"
 "\n"
 "QLineEdit{\n"
-"    border: 1px solid rgb(255, 255, 255);\n"
+"    border: 1px solid rgb(60, 75, 140);\n"
 "    color: rgb(255, 255, 255);\n"
 "    font-size: 14px;\n"
 "}\n"
 "\n"
 "QPushButton {\n"
-"    background-color: rgb(60, 60, 60);\n"
+"    background-color: rgb(40, 40, 40);\n"
 "    color: rgb(255, 255, 255);\n"
-"    border: 1px solid rgb(255, 255, 255);\n"
+"    border: 1px solid rgb(60, 75, 140);\n"
 "    border-radius: 5px;\n"
 "    font-size: 16px;\n"
 "}\n"
 "\n"
 "QToolButton {\n"
-"    background-color: rgb(60, 60, 60);\n"
+"    background-color: rgb(40, 40, 40);\n"
 "    color: rgb(255, 255, 255);\n"
-"    border: 1px solid rgb(255, 255, 255);\n"
+"    border: 1px solid rgb(60, 75, 140);\n"
 "    border-radius: 2px;\n"
 "    font-size: 16px;\n"
 "}\n"
 "\n"
 "QToolButton:hover {\n"
-"    background-color: rgb(80, 80, 80);\n"
-"}")
+"    background-color: rgb(60, 60, 60);\n"
+"}\n"
+"\n"
+"QProgressBar {\n"
+"        border: 2px solid #8f8f91;\n"
+"        border-radius: 2px;\n"
+"        background-color: #54565e;\n"
+"    }")
         MainWindow.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")

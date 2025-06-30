@@ -2,7 +2,32 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog
 from PyQt5.QtCore import QProcess, QTextCodec
 from UI import Ui_MainWindow
 from datetime import datetime
+import ctypes
 import sys
+
+# Константы для темного заголовка
+DWMWA_USE_IMMERSIVE_DARK_MODE = 20
+DWMWA_USE_IMMERSIVE_DARK_MODE_BEFORE_20H1 = 19
+
+class Features():
+    def __init__(self) -> None:
+        pass
+
+    def enable_dark_title_bar(self, hwnd):
+        try:
+            self.value = ctypes.c_int(1)
+            ctypes.windll.dwmapi.DwmSetWindowAttribute(
+                hwnd, 
+                DWMWA_USE_IMMERSIVE_DARK_MODE,
+                ctypes.byref(self.value),
+                ctypes.sizeof(self.value))
+            
+            ctypes.windll.dwmapi.DwmSetWindowAttribute(
+                hwnd,
+                DWMWA_USE_IMMERSIVE_DARK_MODE_BEFORE_20H1,
+                ctypes.byref(self.value),
+                ctypes.sizeof(self.value))
+        except Exception as e: pass
 
 class MyWindow(QMainWindow):
     def __init__(self):
@@ -25,6 +50,12 @@ class MyWindow(QMainWindow):
         self.process.readyReadStandardError.connect(self.handle_stderr)
         self.process.finished.connect(self.process_finished)
         self.process.errorOccurred.connect(self.handle_error)
+
+    def showEvent(self, event):
+        super().showEvent(event)
+        if sys.platform == "win32":
+            hwnd = self.winId()
+            Features.enable_dark_title_bar(self, int(hwnd))
 
     def run_command(self, command):
         self.process.setWorkingDirectory(self.ui.lineEdit.text())
@@ -79,6 +110,7 @@ class MyWindow(QMainWindow):
         self.write_output("Начинаю прошивку...")
         # Получаем путь из поля ввода
         project_path = self.ui.lineEdit.text()
+        self.ui.lineEdit.clearFocus()
         if project_path:
             self.write_output(f"Путь к проекту: {project_path}")
             self.run_command('dir')
@@ -97,6 +129,7 @@ class MyWindow(QMainWindow):
         self.clear_output()
         self.write_output("Загружаю файловую систему...")
         project_path = self.ui.lineEdit.text()
+        self.ui.lineEdit.clearFocus()
         if project_path:
             # Запускаем индикатор загрузки
             self.run_command('pio run -t uploadfs')
@@ -109,6 +142,7 @@ class MyWindow(QMainWindow):
         folder_path = QFileDialog.getExistingDirectory(self, "Выберите папку проекта")
         if folder_path:
             self.ui.lineEdit.setText(folder_path)
+            self.ui.lineEdit.clearFocus()
             self.clear_output()
             self.write_output(f"Выбрана папка проекта: {folder_path}")
 
