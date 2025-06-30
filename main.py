@@ -1,8 +1,7 @@
 from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog
-from PyQt5.QtCore import QProcess, QTextCodec, QTimer
+from PyQt5.QtCore import QProcess, QTextCodec
 from UI import Ui_MainWindow
 from datetime import datetime
-from time import sleep
 import sys
 
 class MyWindow(QMainWindow):
@@ -15,6 +14,8 @@ class MyWindow(QMainWindow):
         self.ui.Button_uploadfs.clicked.connect(self.uploadfs_button_clicked)
         self.ui.toolButton.clicked.connect(self.browse_folder)
         
+        # Изначально прогрессбар неактивен (определённый режим, значение 0)
+        self.ui.progressBar.setRange(0, 100)
         self.ui.progressBar.setValue(0)
         self.codec = QTextCodec.codecForName("cp866")
 
@@ -30,14 +31,12 @@ class MyWindow(QMainWindow):
         self.process.start("cmd.exe", ["/c", "chcp 65001 > nul & " + command])
 
     def handle_stdout(self):
-        """Чтение стандартного вывода"""
         data = self.process.readAllStandardOutput()
         codec = QTextCodec.codecForLocale()
         text = codec.toUnicode(data)
         self.append_output(text)
 
     def handle_stderr(self):
-        """Чтение ошибок"""
         data = self.process.readAllStandardError()
         codec = QTextCodec.codecForLocale()
         text = codec.toUnicode(data)
@@ -47,14 +46,12 @@ class MyWindow(QMainWindow):
         self.ui.conOut.append(text)
 
     def process_finished(self):
-        """Действия после завершения команды"""
         self.append_output("\nProcess finished. Exit code: " + str(self.process.exitCode()))
-        self.ui.progressBar.setValue(100)
-        self.clear_progress()
+        # Останавливаем индикатор загрузки
+        self.stop_progress()
         self.set_buttons_enable(True)
 
     def handle_error(self, error):
-        """Обработка ошибок выполнения"""
         self.append_output(f"ERROR: {error}")
         
     def write_output(self, text):
@@ -63,11 +60,12 @@ class MyWindow(QMainWindow):
     def clear_output(self):
         self.ui.conOut.setText("")
 
-    def clear_progress(self):
-        for i in range(100):
-            self.ui.progressBar.setValue(100-i)
-            QApplication.processEvents() # UI Update
-            sleep(0.01)
+    def start_progress(self):
+        self.ui.progressBar.setRange(0, 0)
+
+    def stop_progress(self):
+        self.ui.progressBar.setRange(0, 100)
+        self.ui.progressBar.setValue(0)
 
     def set_buttons_enable(self, state):
         self.ui.Button_flash.setEnabled(state)
@@ -77,37 +75,37 @@ class MyWindow(QMainWindow):
     def flash_button_clicked(self):
         self.set_buttons_enable(False)
         self.clear_output()
+        self.start_progress()
         self.write_output("Начинаю прошивку...")
         # Получаем путь из поля ввода
         project_path = self.ui.lineEdit.text()
         if project_path:
             self.write_output(f"Путь к проекту: {project_path}")
-            self.ui.progressBar.setValue(20)
             self.run_command('dir')
             self.process.waitForFinished()
             self.set_buttons_enable(False)
-            self.ui.progressBar.setValue(50)
+            self.start_progress()
             self.run_command('pio run -t upload')
         else:
             self.write_output("Операция отменена. Путь к папке проекта не указан.")
-            self.clear_progress()
+            self.stop_progress()
             self.set_buttons_enable(True)
 
     def uploadfs_button_clicked(self):
         self.set_buttons_enable(False)
+        self.start_progress()
         self.clear_output()
         self.write_output("Загружаю файловую систему...")
         project_path = self.ui.lineEdit.text()
         if project_path:
-            self.ui.progressBar.setValue(80)
+            # Запускаем индикатор загрузки
             self.run_command('pio run -t uploadfs')
         else:
             self.write_output("Операция отменена. Путь к папке проекта не указан.")
-            self.clear_progress()
+            self.stop_progress()
             self.set_buttons_enable(True)
     
     def browse_folder(self):
-        """Обработчик кнопки выбора папки"""
         folder_path = QFileDialog.getExistingDirectory(self, "Выберите папку проекта")
         if folder_path:
             self.ui.lineEdit.setText(folder_path)
