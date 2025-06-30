@@ -2,12 +2,15 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog
 from PyQt5.QtCore import QProcess, QTextCodec
 from UI import Ui_MainWindow
 from datetime import datetime
+import warnings
 import ctypes
 import sys
 
 # Константы для темного заголовка
 DWMWA_USE_IMMERSIVE_DARK_MODE = 20
 DWMWA_USE_IMMERSIVE_DARK_MODE_BEFORE_20H1 = 19
+
+warnings.filterwarnings("ignore", category=DeprecationWarning, message="sipPyTypeDict.*")
 
 class Features():
     def __init__(self) -> None:
