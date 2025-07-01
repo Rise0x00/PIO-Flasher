@@ -1,16 +1,5 @@
 # PIO Flasher - GUI Tool for PlatformIO
 
-## Project Description
-
-PIO Flasher is a graphical tool for working with PlatformIO projects that simplifies the process of working with microcontrollers. The application provides a convenient interface for performing basic operations without using the command line.
-
-**Main features:**
-- Device flashing
-- Uploading files to FS
-- Full flash memory erase
-- Console output of command execution results
-- Dark theme support
-
 ## Installation
 
 ### Windows
@@ -33,18 +22,6 @@ PIO Flasher is a graphical tool for working with PlatformIO projects that simpli
 - Python 3.x
 - PlatformIO
 - PyQt5
-
-## Usage
-
-1. Launch the application via `main.py` or use the installation scripts
-2. Specify the path to the PlatformIO project:
-   - Enter the path manually in the text field
-   - Or click "..." to select a folder via the dialog window
-3. Select the desired operation:
-   - **Flash! →** - flashing
-   - **Upload data in board FS →** - upload files to the file system
-   - **Erase flash [X]** - full flash memory erase
-4. Monitor the operation progress in the console output
 
 ## Possible Issues and Solutions
 
