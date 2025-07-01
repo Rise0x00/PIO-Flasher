@@ -111,18 +111,18 @@ class MyWindow(QMainWindow):
         self.set_buttons_enable(False)
         self.clear_output()
         self.start_progress()
-        self.write_output("Начинаю прошивку...")
+        self.write_output("Starting the firmware flashing...")
         project_path = self.ui.lineEdit.text()
         self.ui.lineEdit.clearFocus()
         if project_path:
-            self.write_output(f"Путь к проекту: {project_path}")
+            self.write_output(f"Path to project: {project_path}\n")
             self.run_command('dir')
             self.process.waitForFinished()
             self.set_buttons_enable(False)
             self.start_progress()
             self.run_command('pio run -t upload')
         else:
-            self.write_output("Операция отменена. Путь к папке проекта не указан.")
+            self.write_output("Operation cancelled. Project folder path not specified.")
             self.stop_progress()
             self.set_buttons_enable(True)
 
@@ -130,13 +130,13 @@ class MyWindow(QMainWindow):
         self.set_buttons_enable(False)
         self.start_progress()
         self.clear_output()
-        self.write_output("Загружаю файловую систему...")
+        self.write_output("Loading files to FS...\n")
         project_path = self.ui.lineEdit.text()
         self.ui.lineEdit.clearFocus()
         if project_path:
             self.run_command('pio run -t uploadfs')
         else:
-            self.write_output("Операция отменена. Путь к папке проекта не указан.")
+            self.write_output("Operation cancelled. Project folder path not specified.")
             self.stop_progress()
             self.set_buttons_enable(True)
 
@@ -144,23 +144,23 @@ class MyWindow(QMainWindow):
         self.set_buttons_enable(False)
         self.start_progress()
         self.clear_output()
-        self.write_output("Очищаю flash память платы...")
+        self.write_output("Erasing board flash...\n")
         project_path = self.ui.lineEdit.text()
         self.ui.lineEdit.clearFocus()
         if project_path:
             self.run_command('pio run -t erase')
         else:
-            self.write_output("Операция отменена. Путь к папке проекта не указан.")
+            self.write_output("Operation cancelled. Project folder path not specified.")
             self.stop_progress()
             self.set_buttons_enable(True)
     
     def browse_folder(self):
-        folder_path = QFileDialog.getExistingDirectory(self, "Выберите папку проекта")
+        folder_path = QFileDialog.getExistingDirectory(self, "Select the project folder")
         if folder_path:
             self.ui.lineEdit.setText(folder_path)
             self.ui.lineEdit.clearFocus()
             self.clear_output()
-            self.write_output(f"Выбрана папка проекта: {folder_path}")
+            self.write_output(f"Project folder: {folder_path}\n")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
