@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>380</width>
-    <height>390</height>
+    <height>400</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -22,13 +22,13 @@
   <property name="minimumSize">
    <size>
     <width>380</width>
-    <height>390</height>
+    <height>400</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>380</width>
-    <height>390</height>
+    <height>400</height>
    </size>
   </property>
   <property name="acceptDrops">
@@ -39,45 +39,51 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QWidget {
-    background-color: rgb(65, 65, 65);
+    background-color: rgb(30, 30, 30);
     color: rgb(255, 255, 255);
-	font: 14pt &quot;Arial Rounded MT Bold&quot;;
+    font: 12pt \"Arial Rounded MT Bold\";
 }
 
 QPushButton:hover {
-    background-color: rgb(80, 80, 80);
+    background-color: rgb(60, 60, 60);
 }
 
 QTextEdit{
-	border: 1px solid rgb(255, 255, 255);
-	color: rgb(255, 255, 255);
-	font-size: 12px;
+    border: 1px solid rgb(60, 75, 140);
+    color: rgb(255, 255, 255);
+    font-size: 12px;
 }
 
 QLineEdit{
-	border: 1px solid rgb(255, 255, 255);
-	color: rgb(255, 255, 255);
-	font-size: 14px;
+    border: 1px solid rgb(60, 75, 140);
+    color: rgb(255, 255, 255);
+    font-size: 14px;
 }
 
 QPushButton {
-    background-color: rgb(60, 60, 60);
-	color: rgb(255, 255, 255);
-    border: 1px solid rgb(255, 255, 255);
+    background-color: rgb(40, 40, 40);
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(60, 75, 140);
     border-radius: 5px;
     font-size: 16px;
 }
 
 QToolButton {
-    background-color: rgb(60, 60, 60);
-	color: rgb(255, 255, 255);
-    border: 1px solid rgb(255, 255, 255);
+    background-color: rgb(40, 40, 40);
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(60, 75, 140);
     border-radius: 2px;
     font-size: 16px;
 }
 
 QToolButton:hover {
-    background-color: rgb(80, 80, 80);
+    background-color: rgb(60, 60, 60);
+}
+
+QProgressBar {
+    border: 2px solid #8f8f91;
+    border-radius: 2px;
+    background-color: #54565e;
 }</string>
   </property>
   <property name="toolButtonStyle">
