@@ -15,19 +15,19 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setWindowModality(QtCore.Qt.NonModal)
-        MainWindow.resize(380, 400)
+        MainWindow.resize(380, 420)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
-        MainWindow.setMinimumSize(QtCore.QSize(380, 400))
-        MainWindow.setMaximumSize(QtCore.QSize(380, 400))
+        MainWindow.setMinimumSize(QtCore.QSize(380, 420))
+        MainWindow.setMaximumSize(QtCore.QSize(380, 420))
         MainWindow.setAcceptDrops(True)
         MainWindow.setStyleSheet("QWidget {\n"
 "    background-color: rgb(30, 30, 30);\n"
 "    color: rgb(255, 255, 255);\n"
-"    font: 12pt \"Arial Rounded MT Bold\";\n"
+"    font: 12pt \\\"Arial Rounded MT Bold\\\";\n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
@@ -67,15 +67,15 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "QProgressBar {\n"
-"        border: 2px solid #8f8f91;\n"
-"        border-radius: 2px;\n"
-"        background-color: #54565e;\n"
-"    }")
+"    border: 2px solid #8f8f91;\n"
+"    border-radius: 2px;\n"
+"    background-color: #54565e;\n"
+"}")
         MainWindow.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(20, 90, 341, 271))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(20, 70, 341, 321))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -90,6 +90,9 @@ class Ui_MainWindow(object):
         self.Button_uploadfs = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.Button_uploadfs.setObjectName("Button_uploadfs")
         self.verticalLayout.addWidget(self.Button_uploadfs)
+        self.Button_erase_flash = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.Button_erase_flash.setObjectName("Button_erase_flash")
+        self.verticalLayout.addWidget(self.Button_erase_flash)
         self.progressBar = QtWidgets.QProgressBar(self.verticalLayoutWidget)
         self.progressBar.setProperty("value", 0)
         self.progressBar.setTextVisible(False)
@@ -97,19 +100,19 @@ class Ui_MainWindow(object):
         self.progressBar.setInvertedAppearance(False)
         self.progressBar.setObjectName("progressBar")
         self.verticalLayout.addWidget(self.progressBar)
-        self.widget = QtWidgets.QWidget(self.centralwidget)
-        self.widget.setGeometry(QtCore.QRect(20, 30, 341, 27))
-        self.widget.setObjectName("widget")
-        self.horizontalLayout = QtWidgets.QHBoxLayout(self.widget)
+        self.layoutWidget = QtWidgets.QWidget(self.centralwidget)
+        self.layoutWidget.setGeometry(QtCore.QRect(20, 30, 341, 27))
+        self.layoutWidget.setObjectName("layoutWidget")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.layoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.lineEdit = QtWidgets.QLineEdit(self.widget)
+        self.lineEdit = QtWidgets.QLineEdit(self.layoutWidget)
         self.lineEdit.setInputMask("")
         self.lineEdit.setText("")
         self.lineEdit.setMaxLength(32767)
         self.lineEdit.setObjectName("lineEdit")
         self.horizontalLayout.addWidget(self.lineEdit)
-        self.toolButton = QtWidgets.QToolButton(self.widget)
+        self.toolButton = QtWidgets.QToolButton(self.layoutWidget)
         self.toolButton.setObjectName("toolButton")
         self.horizontalLayout.addWidget(self.toolButton)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -126,5 +129,6 @@ class Ui_MainWindow(object):
         self.conOut.setPlaceholderText(_translate("MainWindow", "CONSOLE OUTPUT"))
         self.Button_flash.setText(_translate("MainWindow", "Flash! 🡺"))
         self.Button_uploadfs.setText(_translate("MainWindow", "Upload data in board FS 🡺"))
+        self.Button_erase_flash.setText(_translate("MainWindow", "Erase flash [X]"))
         self.lineEdit.setPlaceholderText(_translate("MainWindow", "Path to PIO project folder"))
         self.toolButton.setText(_translate("MainWindow", "..."))

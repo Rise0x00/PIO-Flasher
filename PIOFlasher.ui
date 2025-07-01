@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>380</width>
-    <height>400</height>
+    <height>420</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -22,13 +22,13 @@
   <property name="minimumSize">
    <size>
     <width>380</width>
-    <height>400</height>
+    <height>420</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>380</width>
-    <height>400</height>
+    <height>420</height>
    </size>
   </property>
   <property name="acceptDrops">
@@ -41,7 +41,7 @@
    <string notr="true">QWidget {
     background-color: rgb(30, 30, 30);
     color: rgb(255, 255, 255);
-    font: 12pt \"Arial Rounded MT Bold\";
+    font: 12pt \&quot;Arial Rounded MT Bold\&quot;;
 }
 
 QPushButton:hover {
@@ -94,14 +94,14 @@ QProgressBar {
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>90</y>
+      <y>70</y>
       <width>341</width>
-      <height>271</height>
+      <height>321</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QTextEdit" name="textEdit">
+      <widget class="QTextEdit" name="conOut">
        <property name="readOnly">
         <bool>true</bool>
        </property>
@@ -125,6 +125,13 @@ QProgressBar {
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="Button_erase_flash">
+       <property name="text">
+        <string>Erase flash [X]</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QProgressBar" name="progressBar">
        <property name="value">
         <number>0</number>
@@ -142,7 +149,7 @@ QProgressBar {
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>20</x>
