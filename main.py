@@ -11,25 +11,27 @@ DWMWA_USE_IMMERSIVE_DARK_MODE_BEFORE_20H1 = 19
 
 warnings.filterwarnings("ignore", category=DeprecationWarning, message="sipPyTypeDict.*")
 
-class Features():
+class DarkTheme():
     def __init__(self) -> None:
         pass
-
-    def enable_dark_title_bar(self, hwnd):
+    
+    @staticmethod
+    def enable_dark_title_bar(hwnd) -> None:
         try:
-            self.value = ctypes.c_int(1)
+            value = ctypes.c_int(1)
             ctypes.windll.dwmapi.DwmSetWindowAttribute(
                 hwnd, 
                 DWMWA_USE_IMMERSIVE_DARK_MODE,
-                ctypes.byref(self.value),
-                ctypes.sizeof(self.value))
+                ctypes.byref(value),
+                ctypes.sizeof(value))
             
             ctypes.windll.dwmapi.DwmSetWindowAttribute(
                 hwnd,
                 DWMWA_USE_IMMERSIVE_DARK_MODE_BEFORE_20H1,
-                ctypes.byref(self.value),
-                ctypes.sizeof(self.value))
-        except Exception as e: pass
+                ctypes.byref(value),
+                ctypes.sizeof(value))
+        except Exception as e: 
+            pass
 
 class MyWindow(QMainWindow):
     def __init__(self):
@@ -52,11 +54,9 @@ class MyWindow(QMainWindow):
         self.process.finished.connect(self.process_finished)
         self.process.errorOccurred.connect(self.handle_error)
 
-    def showEvent(self, event):
-        super().showEvent(event)
         if sys.platform == "win32":
             hwnd = self.winId()
-            Features.enable_dark_title_bar(self, int(hwnd))
+            DarkTheme.enable_dark_title_bar(int(hwnd))
 
     # Service functions
     def run_command(self, command):
